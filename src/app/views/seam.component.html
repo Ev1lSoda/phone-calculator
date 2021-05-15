@@ -1,0 +1,97 @@
+<ActionBar>
+  <FlexBoxLayout>
+    <image src="~/app/images/logo.png"></image>
+    <Label class="logo" text="brit"></Label>
+  </FlexBoxLayout>
+</ActionBar>
+
+<StackLayout class="page__content">
+  <FlexBoxLayout class="zone-pick">
+    <Label class="mainLabels" text="Созданные Швы:1"></Label>
+  </FlexBoxLayout>
+  <ScrollView orientation="horizontal" (scroll)="onScroll($event)">
+    <FlexBoxLayout class="zone-pick">
+      <Button class="dkz-btn" text="1"></Button>
+      <Button class="dkz-btn" text="2"></Button>
+      <Button class="dkz-btn" text="3"></Button>
+      <Button class="dkz-btn" text="4"></Button>
+      <Button class="dkz-btn" text="5"></Button>
+      <Button class="dkz-btn" text="6"></Button>
+      <Button class="dkz-btn" text="7"></Button>
+      <Button class="dkz-btn" text="8"></Button>
+      <Button class="dkz-btn" text="9"></Button>
+      <Button class="dkz-btn" text="10"></Button>
+    </FlexBoxLayout>
+  </ScrollView>
+  <FlexBoxLayout class="zone-pick">
+    <Label class="mainLabels" text="Выбор дорожно-климатической зоны:"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Button
+      (tap)="pickHermetic(0)"
+      [ngClass]="curDkz === 0 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      text="&#8544;"
+    ></Button>
+    <Button
+      (tap)="pickHermetic(1)"
+      [ngClass]="curDkz === 1 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      text="&#8545;"
+    ></Button>
+    <Button
+      (tap)="pickHermetic(2)"
+      [ngClass]="curDkz === 2 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      text="&#8546;"
+    ></Button>
+    <Button
+      (tap)="pickHermetic(3)"
+      [ngClass]="curDkz === 3 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      text="&#8547;"
+    ></Button>
+    <Button
+      (tap)="pickHermetic(4)"
+      [ngClass]="curDkz === 4 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      text="&#8548;"
+    ></Button>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Label class="mainLabels" text="Выбор герметика:"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Button class="dkz-btn" text="БП-Г50"></Button>
+    <Button class="dkz-btn" text="NORD"></Button>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="input-zone">
+    <Label text="Lш"></Label>
+    <TextField hint="Длина шва" keyboardType="number"></TextField>
+    <Label text="м"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="input-zone">
+    <Label text="Bш"></Label>
+    <TextField hint="Ширина шва" keyboardType="number"></TextField>
+    <Label text="мм"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="input-zone">
+    <Label text="Hш"></Label>
+    <TextField hint="Глубина разделки шва" keyboardType="number"></TextField>
+    <Label text="мм"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="input-zone">
+    <Label text="Hзш"></Label>
+    <TextField
+      hint="Глубина заливки камеры шва"
+      keyboardType="number"
+    ></TextField>
+    <Label text="мм"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="input-zone">
+    <Button class="rule-btn" text="Добавить"></Button>
+    <Button class="rule-btn" text="Удалить"></Button>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="input-zone">
+    <Button class="rule-btn" text="Обновить"></Button>
+    <Button class="rule-btn" text="Очистить"></Button>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="input-zone">
+    <Button class="rule-btn" text="Рассчитать"></Button>
+  </FlexBoxLayout>
+</StackLayout>

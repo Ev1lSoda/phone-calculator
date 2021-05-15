@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ScrollView, ScrollEventData } from "@nativescript/core";
+import { TextField } from "@nativescript/core";
 
 import { CalcStateService } from "../service/calc-state.service";
 import { Calculations } from "../classes/calculations";
@@ -71,6 +71,10 @@ export class SeamComponent implements OnInit {
     this.seamList = this.calcService.getSeams().inputs;
     this.showEditButton = false;
   }
+  //РАБОТАЕТ!!!Ч
+  // submit() {
+  //   alert("Enter a valid email address.");
+  // }
 
   pickHermetic(dkz: number): void {
     if (dkz > -1) {
@@ -91,18 +95,17 @@ export class SeamComponent implements OnInit {
       }
     }
   }
-  onScroll(args: ScrollEventData) {
-    const scrollView = args.object as ScrollView;
-  }
-
   getDen(denIndex: number): void {
     this.indexOfCurHer = denIndex;
     this.calcInfo.den = this.hermetic[this.curDkz].den[denIndex];
     console.log(".calcInfo.den: ", this.calcInfo.den);
   }
 
-  getInputLength(): void {
-    this.calcInfo.seamLength = this.seamLength;
+  getInputLength(args): void {
+    let textField = <TextField>args.object;
+    this.seamLength = textField.text;
+    this.calcInfo.seamLength = Number(this.seamLength);
+    console.log("seamLength: ", this.calcInfo.seamLength);
     if (this.seamLength < 1 || this.seamLength > 10000) {
       this.wrongLength = true;
     } else {
@@ -110,11 +113,13 @@ export class SeamComponent implements OnInit {
     }
   }
 
-  getInputWidth(): void {
+  getInputWidth(args): void {
+    let textField = <TextField>args.object;
+    this.seamWidth = textField.text;
     this.calcInfo.seamCastDepth = -1;
     this.seamCastDepth = null;
     this.seamDepth = null;
-    this.calcInfo.seamWidth = this.seamWidth;
+    this.calcInfo.seamWidth = Number(this.seamWidth);
     console.log("seamWidth: ", this.seamWidth);
     console.log(
       "Calculations: ",
@@ -135,28 +140,40 @@ export class SeamComponent implements OnInit {
     }
   }
 
-  getInputDepth(): void {
-    const seamWidthDemension = Calculations.getSeamWidthDimensions(
-      this.calcInfo.seamWidth
-    );
-    if (this.seamDepth <= seamWidthDemension) {
-      this.wrongDepth = true;
+  getInputDepth(args): void {
+    let textField = <TextField>args.object;
+    this.seamDepth = textField.text;
+    console.log("seamDepth: ", this.seamDepth);
+
+    if (this.seamDepth === null || this.seamDepth === undefined) {
+      this.calcInfo.seamCastDepth = null;
+      this.seamCastDepth = null;
     } else {
-      this.wrongDepth = false;
+      const seamWidthDemension = Calculations.getSeamWidthDimensions(
+        this.calcInfo.seamWidth
+      );
+      if (this.seamDepth <= seamWidthDemension) {
+        this.wrongDepth = true;
+      } else {
+        this.wrongDepth = false;
+      }
+      this.calcInfo.seamCastDepth = Number(this.seamDepth) - seamWidthDemension;
+      this.seamCastDepth = this.calcInfo.seamCastDepth;
+      if (this.seamCastDepth < 1 || this.seamCastDepth > 1000) {
+        this.wrongCastDepth = true;
+      } else {
+        this.wrongCastDepth = false;
+      }
     }
-    this.calcInfo.seamCastDepth = this.seamDepth - seamWidthDemension;
-    this.seamCastDepth = this.calcInfo.seamCastDepth;
-    if (this.seamCastDepth < 1 || this.seamCastDepth > 1000) {
-      this.wrongCastDepth = true;
-    } else {
-      this.wrongCastDepth = false;
-    }
+    console.log("seamCastDepth: ", this.seamCastDepth);
   }
 
-  getInputCastDepth(): void {
+  getInputCastDepth(args): void {
+    let textField = <TextField>args.object;
+    this.seamCastDepth = textField.text;
     console.log("seamCastDepth: ", this.seamCastDepth);
-    this.calcInfo.seamCastDepth = this.seamCastDepth;
-    if (this.seamCastDepth < 1 || this.seamCastDepth > 1000) {
+    this.calcInfo.seamCastDepth = Number(this.seamCastDepth);
+    if (this.calcInfo.seamCastDepth < 1 || this.calcInfo.seamCastDepth > 1000) {
       this.wrongCastDepth = true;
     } else {
       this.wrongCastDepth = false;
@@ -165,12 +182,8 @@ export class SeamComponent implements OnInit {
     const seamWidthDemension = Calculations.getSeamWidthDimensions(
       this.calcInfo.seamWidth
     );
-    this.seamDepth = this.seamCastDepth + seamWidthDemension;
-    if (this.seamDepth <= seamWidthDemension) {
-      this.wrongDepth = true;
-    } else {
-      this.wrongDepth = false;
-    }
+    this.seamDepth = Number(this.seamCastDepth) + seamWidthDemension;
+    this.wrongDepth = true;
   }
 
   onSaveSeam(): void {
@@ -183,6 +196,10 @@ export class SeamComponent implements OnInit {
       seamWidth: this.seamWidth,
       seamDepth: this.seamDepth,
       seamCastDepth: this.seamCastDepth
+      // seamLength: `${this.seamLength}`,
+      // seamWidth: `${this.seamWidth}`,
+      // seamDepth: `${this.seamDepth}`,
+      // seamCastDepth: `${this.seamCastDepth}`
     };
 
     const curVolume = Calculations.getVolumeOfHer({
@@ -201,9 +218,11 @@ export class SeamComponent implements OnInit {
     this.calcService.saveSeams(newSeam, newSeamResults);
     this.seamList = this.calcService.getSeams().inputs;
     console.log("seamList: ", this.seamList);
+    this.onClear();
   }
 
   getSelectedSeam(seamID: number): void {
+    this.onClear();
     this.showEditButton = true;
     console.log("seamList[seamID]: ", this.seamList[seamID]);
 
@@ -233,9 +252,9 @@ export class SeamComponent implements OnInit {
 
     this.calcInfo = {
       den: this.hermetic[this.curDkz].den[this.indexOfCurHer],
-      seamLength: this.seamLength,
-      seamWidth: this.seamWidth,
-      seamCastDepth: this.seamCastDepth
+      seamLength: Number(this.seamLength),
+      seamWidth: Number(this.seamWidth),
+      seamCastDepth: Number(this.seamCastDepth)
     };
   }
 
@@ -309,8 +328,8 @@ export class SeamComponent implements OnInit {
       this.calcInfo.seamLength < 0 ||
       this.calcInfo.seamWidth < 0 ||
       this.calcInfo.seamCastDepth < 0
-      ? true
-      : false;
+      ? false
+      : true;
   }
 
   // { "dkz": 2, "her": 1, "den": 1, "seamLength": 12, "seamWidth": 23, "seamDepth": 43, "seamCastDepth": 13 }{ "dkz": 0, "her": 0, "den": 0, "seamLength": 11, "seamWidth": 22, "seamDepth": 33, "seamCastDepth": 3 }

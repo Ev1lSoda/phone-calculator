@@ -12,6 +12,10 @@
 .dkz-selected-btn {
   background-color: rgb(47, 180, 233);
 }
+.dkz-btn-her {
+  width: 30%;
+  margin: 0;
+}
 .input-zone {
   margin: 0;
   display: flex;

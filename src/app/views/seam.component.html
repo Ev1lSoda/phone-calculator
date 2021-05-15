@@ -7,20 +7,19 @@
 
 <StackLayout class="page__content">
   <FlexBoxLayout class="zone-pick">
-    <Label class="mainLabels" text="Созданные Швы:"></Label>
+    <Label
+      class="mainLabels"
+      text="Созданные Швы: {{ seamList.length }}"
+    ></Label>
   </FlexBoxLayout>
-  <ScrollView orientation="horizontal" (scroll)="onScroll($event)">
+  <ScrollView orientation="horizontal">
     <FlexBoxLayout class="zone-pick">
-      <Button class="dkz-btn" text="1"></Button>
-      <Button class="dkz-btn" text="2"></Button>
-      <Button class="dkz-btn" text="3"></Button>
-      <Button class="dkz-btn" text="4"></Button>
-      <Button class="dkz-btn" text="5"></Button>
-      <Button class="dkz-btn" text="6"></Button>
-      <Button class="dkz-btn" text="7"></Button>
-      <Button class="dkz-btn" text="8"></Button>
-      <Button class="dkz-btn" text="9"></Button>
-      <Button class="dkz-btn" text="10"></Button>
+      <Button
+        *ngFor="let seam of seamList; let i = index"
+        (tap)="getSelectedSeam(i)"
+        [ngClass]="curSeamID === i ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
+        text="Шов №{{ i + 1 }}"
+      ></Button>
     </FlexBoxLayout>
   </ScrollView>
   <FlexBoxLayout class="zone-pick">
@@ -56,23 +55,63 @@
   <FlexBoxLayout class="zone-pick">
     <Label class="mainLabels" text="Выбор герметика:"></Label>
   </FlexBoxLayout>
-  <FlexBoxLayout class="zone-pick">
-    <Button class="dkz-btn" text="БП-Г50"></Button>
-    <Button class="dkz-btn" text="NORD"></Button>
+  <FlexBoxLayout
+    class="zone-pick"
+    *ngIf="curHermetic.single || curHermetic.one"
+  >
+    <Button
+      *ngIf="!curHermetic.one"
+      [ngClass]="
+        indexOfCurHer === 0 ? 'dkz-btn-her dkz-selected-btn' : 'dkz-btn'
+      "
+      (tap)="getDen(0)"
+      text="{{ curHermetic.single }}"
+    ></Button>
+    <Button
+      *ngIf="curHermetic.one"
+      [ngClass]="
+        indexOfCurHer === 0 ? 'dkz-btn-her dkz-selected-btn' : 'dkz-btn-her'
+      "
+      (tap)="getDen(0)"
+      text="{{ curHermetic.one }}"
+    ></Button>
+    <Button
+      *ngIf="curHermetic.two"
+      [ngClass]="
+        indexOfCurHer === 1 ? 'dkz-btn-her dkz-selected-btn' : 'dkz-btn-her'
+      "
+      (tap)="getDen(1)"
+      text="{{ curHermetic.two }}"
+    ></Button>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
     <Label text="Lш"></Label>
-    <TextField hint="Длина шва" keyboardType="number"></TextField>
+    <TextField
+      hint="Длина шва"
+      keyboardType="number"
+      [text]="seamLength"
+      (textChange)="getInputLength($event)"
+    ></TextField>
     <Label text="м"></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
     <Label text="Bш"></Label>
-    <TextField hint="Ширина шва" keyboardType="number"></TextField>
+    <TextField
+      hint="Ширина шва"
+      keyboardType="number"
+      [text]="seamWidth"
+      (textChange)="getInputWidth($event)"
+    ></TextField>
     <Label text="мм"></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
     <Label text="Hш"></Label>
-    <TextField hint="Глубина разделки шва" keyboardType="number"></TextField>
+    <TextField
+      hint="Глубина разделки шва"
+      keyboardType="number"
+      [text]="seamDepth"
+      (textChange)="getInputDepth($event)"
+    ></TextField>
     <Label text="мм"></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
@@ -80,18 +119,39 @@
     <TextField
       hint="Глубина заливки камеры шва"
       keyboardType="number"
+      [text]="seamCastDepth"
+      (textChange)="getInputCastDepth($event)"
     ></TextField>
     <Label text="мм"></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
-    <Button class="rule-btn" text="Добавить"></Button>
-    <Button class="rule-btn" text="Удалить"></Button>
+    <Button
+      [isEnabled]="chkBtnDisabled()"
+      (tap)="onSaveSeam()"
+      class="rule-btn"
+      text="Добавить"
+    ></Button>
+    <Button
+      [isEnabled]="chkBtnDisabled()"
+      (tap)="onDelete()"
+      class="rule-btn"
+      text="Удалить"
+    ></Button>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
-    <Button class="rule-btn" text="Обновить"></Button>
-    <Button class="rule-btn" text="Очистить"></Button>
+    <Button
+      [isEnabled]="chkBtnDisabled()"
+      (tap)="onUpdate()"
+      class="rule-btn"
+      text="Обновить"
+    ></Button>
+    <Button (tap)="onClear()" class="rule-btn" text="Очистить"></Button>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
-    <Button class="rule-btn" text="Рассчитать"></Button>
+    <Button
+      [isEnabled]="!!seamList.length"
+      class="rule-btn"
+      text="Рассчитать"
+    ></Button>
   </FlexBoxLayout>
 </StackLayout>

@@ -7,7 +7,7 @@
 
 <StackLayout class="page__content">
   <FlexBoxLayout class="zone-pick">
-    <Label class="mainLabels" text="Созданные Швы:1"></Label>
+    <Label class="mainLabels" text="Созданные Швы:"></Label>
   </FlexBoxLayout>
   <ScrollView orientation="horizontal" (scroll)="onScroll($event)">
     <FlexBoxLayout class="zone-pick">
@@ -29,27 +29,27 @@
   <FlexBoxLayout class="zone-pick">
     <Button
       (tap)="pickHermetic(0)"
-      [ngClass]="curDkz === 0 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      [ngClass]="curDkz === 0 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
       text="&#8544;"
     ></Button>
     <Button
       (tap)="pickHermetic(1)"
-      [ngClass]="curDkz === 1 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      [ngClass]="curDkz === 1 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
       text="&#8545;"
     ></Button>
     <Button
       (tap)="pickHermetic(2)"
-      [ngClass]="curDkz === 2 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      [ngClass]="curDkz === 2 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
       text="&#8546;"
     ></Button>
     <Button
       (tap)="pickHermetic(3)"
-      [ngClass]="curDkz === 3 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      [ngClass]="curDkz === 3 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
       text="&#8547;"
     ></Button>
     <Button
       (tap)="pickHermetic(4)"
-      [ngClass]="curDkz === 4 ? 'dkz-btn, dkz-selected-btn' : 'dkz-btn'"
+      [ngClass]="curDkz === 4 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
       text="&#8548;"
     ></Button>
   </FlexBoxLayout>

@@ -1,0 +1,27 @@
+image {
+  width: 100px;
+  height: 100px;
+}
+.logo {
+  font-size: 30em;
+  font-weight: bold;
+  color: rgb(0, 112, 186);
+}
+.zone-pick {
+  margin: 0px 75px 0px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+label {
+  font-size: 15em;
+  font-weight: bold;
+  color: rgb(47, 180, 233);
+}
+button {
+  font-size: 15em;
+  font-weight: bold;
+  color: rgb(0, 112, 186);
+}

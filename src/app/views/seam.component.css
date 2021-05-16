@@ -52,3 +52,21 @@ image {
   font-weight: bold;
   color: rgb(0, 112, 186);
 }
+.user-input-warning {
+  border: 1px solid red;
+  color: red;
+  /*font-weight: bolder;*/
+  background-color: lightgoldenrodyellow;
+}
+.user-outer-warning {
+  visibility: visible;
+  font-size: 15em;
+  color: red;
+  padding-left: 0.12em;
+}
+
+.user-outer-nowarning {
+  font-size: 15em;
+  visibility: hidden;
+  padding-left: 0.12em;
+}

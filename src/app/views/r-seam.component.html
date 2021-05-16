@@ -1,0 +1,30 @@
+<!-- <ActionBar>
+  <NavigationButton
+    (tap)="onBackTap()"
+    android.systemIcon="ic_menu_back"
+  ></NavigationButton>
+  <Label text="Результат"></Label>
+</ActionBar> -->
+<ActionBar>
+  <FlexBoxLayout>
+    <image src="~/app/images/logo.png"></image>
+    <Label class="logo" text="brit"></Label>
+  </FlexBoxLayout>
+</ActionBar>
+<StackLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Label text="Герметик: {{ results['mass'] }} "></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Label text="Грунтовка полимерная: {{ results['gMass'] }}"> </Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Label text="Шнур уплотнительный термостойкий «Брит»:"> </Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick" *ngFor="let indexOfRez of helper"
+    ><Label text="Шнур Ø{{ indexOfRez }}: {{ results[indexOfRez] }} "></Label
+  ></FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Button (tap)="onBackTap()" text="Назад"></Button>
+  </FlexBoxLayout>
+</StackLayout>

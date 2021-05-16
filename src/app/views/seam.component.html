@@ -90,9 +90,15 @@
       hint="Длина шва"
       keyboardType="number"
       [text]="seamLength"
+      [ngClass]="wrongLength ? 'user-input-warning' : ''"
       (blur)="getInputLength($event)"
     ></TextField>
     <Label text="м"></Label>
+    <Label
+      [ngClass]="wrongLength ? 'user-outer-warning' : 'user-outer-nowarning'"
+      text="&nbsp;&#9888;"
+      (tap)="warnUser('1000 > Lш > 1')"
+    ></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
     <Label text="Bш"></Label>
@@ -100,9 +106,15 @@
       hint="Ширина шва"
       keyboardType="number"
       [text]="seamWidth"
+      [ngClass]="wrongWidth ? 'user-input-warning' : ''"
       (textChange)="getInputWidth($event)"
     ></TextField>
     <Label text="мм"></Label>
+    <Label
+      [ngClass]="wrongWidth ? 'user-outer-warning' : 'user-outer-nowarning'"
+      text="&nbsp;&#9888;"
+      (tap)="warnUser('39 > Bш > 5')"
+    ></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
     <Label text="Hш"></Label>
@@ -110,10 +122,16 @@
       hint="Глубина разделки шва"
       keyboardType="number"
       [text]="seamDepth"
+      [ngClass]="wrongDepth ? 'user-input-warning' : ''"
       [isEnabled]="chkDepthDisabled()"
       (textChange)="getInputDepth($event)"
     ></TextField>
     <Label text="мм"></Label>
+    <Label
+      [ngClass]="wrongDepth ? 'user-outer-warning' : 'user-outer-nowarning'"
+      text="&nbsp;&#9888;"
+      (tap)="warnUser(' Hш > Bш')"
+    ></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
     <Label text="Hзш"></Label>
@@ -121,10 +139,16 @@
       hint="Глубина заливки камеры шва"
       keyboardType="number"
       [text]="seamCastDepth"
+      [ngClass]="wrongCastDepth ? 'user-input-warning' : ''"
       [isEnabled]="chkCastDepthDisabled()"
       (textChange)="getInputCastDepth($event)"
     ></TextField>
     <Label text="мм"></Label>
+    <Label
+      [ngClass]="wrongCastDepth ? 'user-outer-warning' : 'user-outer-nowarning'"
+      text="&nbsp;&#9888;"
+      (tap)="warnUser('1000 > Hзш > 1')"
+    ></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
     <Button
@@ -153,6 +177,7 @@
     <Button
       [isEnabled]="!!seamList.length"
       class="rule-btn"
+      [nsRouterLink]="'rseam'"
       text="Рассчитать"
     ></Button>
   </FlexBoxLayout>

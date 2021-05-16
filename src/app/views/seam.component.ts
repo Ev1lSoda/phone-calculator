@@ -70,9 +70,9 @@ export class SeamComponent implements OnInit {
     this.seamList = this.calcService.getSeams().inputs;
   }
   //РАБОТАЕТ!!!Ч
-  // submit() {
-  //   alert("Enter a valid email address.");
-  // }
+  warnUser(text: string) {
+    alert(text);
+  }
 
   pickHermetic(dkz: number): void {
     if (dkz > -1) {
@@ -131,6 +131,9 @@ export class SeamComponent implements OnInit {
       } else {
         this.wrongLength = false;
       }
+    } else {
+      this.calcInfo.seamLength = -1;
+      this.wrongLength = false;
     }
   }
 
@@ -157,6 +160,7 @@ export class SeamComponent implements OnInit {
       this.calcInfo.seamCastDepth = this.calcInfo.seamDepth - test;
     } else {
       this.calcInfo.seamWidth = -1;
+      this.wrongWidth = false;
     }
   }
 

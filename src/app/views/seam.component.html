@@ -90,7 +90,7 @@
       hint="Длина шва"
       keyboardType="number"
       [text]="seamLength"
-      (textChange)="getInputLength($event)"
+      (blur)="getInputLength($event)"
     ></TextField>
     <Label text="м"></Label>
   </FlexBoxLayout>
@@ -110,6 +110,7 @@
       hint="Глубина разделки шва"
       keyboardType="number"
       [text]="seamDepth"
+      [isEnabled]="chkDepthDisabled()"
       (textChange)="getInputDepth($event)"
     ></TextField>
     <Label text="мм"></Label>
@@ -120,13 +121,14 @@
       hint="Глубина заливки камеры шва"
       keyboardType="number"
       [text]="seamCastDepth"
+      [isEnabled]="chkCastDepthDisabled()"
       (textChange)="getInputCastDepth($event)"
     ></TextField>
     <Label text="мм"></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
     <Button
-      [isEnabled]="chkBtnDisabled()"
+      [isEnabled]="chkCreateDisabled()"
       (tap)="onSaveSeam()"
       class="rule-btn"
       text="Добавить"

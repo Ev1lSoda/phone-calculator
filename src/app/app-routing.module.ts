@@ -8,7 +8,7 @@ import {
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "/(seamTab:seam/default//searchTab:search/default)",
+    redirectTo: "/(seamTab:seam/default//stoneTab:stone/default)",
     pathMatch: "full"
   },
   {
@@ -19,11 +19,11 @@ const routes: Routes = [
     outlet: "seamTab"
   },
   {
-    path: "search",
+    path: "stone",
     component: NSEmptyOutletComponent,
     loadChildren: () =>
-      import("~/app/search/search.module").then(m => m.SearchModule),
-    outlet: "searchTab"
+      import("~/app/views/stone.module").then(m => m.StoneModule),
+    outlet: "stoneTab"
   }
 ];
 

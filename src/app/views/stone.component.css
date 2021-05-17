@@ -55,11 +55,7 @@ image {
 .user-input-warning {
   border: 1px solid red;
   color: red;
-  background-color: lightgoldenrodyellow;
-}
-.user-input-width-warning {
-  border: 1px solid red;
-  color: rgb(255, 200, 50);
+  /*font-weight: bolder;*/
   background-color: lightgoldenrodyellow;
 }
 .user-outer-warning {
@@ -68,12 +64,7 @@ image {
   color: red;
   padding-left: 0.12em;
 }
-.user-width-warning {
-  visibility: visible;
-  font-size: 15em;
-  color: rgb(255, 200, 50);
-  padding-left: 0.12em;
-}
+
 .user-outer-nowarning {
   font-size: 15em;
   visibility: hidden;

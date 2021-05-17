@@ -32,3 +32,15 @@ button {
   font-weight: bold;
   color: rgb(0, 112, 186);
 }
+.b {
+  padding-top: 10em;
+  font-size: 10em;
+  font-weight: 700;
+  color: rgb(47, 180, 233);
+}
+.u {
+  padding-bottom: 10em;
+  font-size: 10em;
+  font-weight: 700;
+  color: rgb(47, 180, 233);
+}

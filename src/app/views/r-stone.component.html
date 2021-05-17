@@ -1,0 +1,35 @@
+<ActionBar>
+  <FlexBoxLayout>
+    <image src="~/app/images/logo.png"></image>
+    <Label class="logo" text="brit"></Label>
+  </FlexBoxLayout>
+</ActionBar>
+<StackLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Label text="m"></Label><Label class="b" text="щ"></Label
+    ><Label class="u" text="10-20"></Label
+    ><Label text=":  {{ results['Msh1020'] }} кг"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Label text="m"></Label><Label class="b" text="щ"></Label
+    ><Label class="u" text="5-10"></Label
+    ><Label text=":  {{ results['Msh510'] }} кг"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Label text="m"></Label><Label class="b" text="щ"></Label
+    ><Label class="u" text="3-5"></Label
+    ><Label text=":  {{ results['Msh35'] }} кг"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Label text="m"></Label><Label class="b" text="гр"></Label
+    ><Label text=":  {{ results['Mgr'] }} кг"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-pick">
+    <Label text="m"></Label><Label class="b" text="м"></Label
+    ><Label class="u" text="ср"></Label
+    ><Label text=":  {{ results['MmCP'] }} кг"></Label>
+  </FlexBoxLayout>
+  <FlexBoxLayout class="zone-btn">
+    <Button (tap)="onBackTap()" text="Назад"></Button>
+  </FlexBoxLayout>
+</StackLayout>

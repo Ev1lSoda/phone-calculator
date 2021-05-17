@@ -16,7 +16,7 @@
     <FlexBoxLayout class="zone-pick">
       <Button
         *ngFor="let seam of seamList; let i = index"
-        (tap)="getSelectedSeam(i)"
+        (tap)="getSelectedStone(i)"
         [ngClass]="curSeamID === i ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
         text="Шов №{{ i + 1 }}"
       ></Button>
@@ -27,61 +27,24 @@
   </FlexBoxLayout>
   <FlexBoxLayout class="zone-pick">
     <Button
-      (tap)="pickHermetic(0)"
-      [ngClass]="curDkz === 0 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
-      text="&#8544;"
-    ></Button>
-    <Button
-      (tap)="pickHermetic(1)"
-      [ngClass]="curDkz === 1 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
-      text="&#8545;"
-    ></Button>
-    <Button
-      (tap)="pickHermetic(2)"
+      (tap)="pickMast(2)"
       [ngClass]="curDkz === 2 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
-      text="&#8546;"
+      text="&#8545; ДШ-85"
     ></Button>
     <Button
-      (tap)="pickHermetic(3)"
+      (tap)="pickMast(3)"
       [ngClass]="curDkz === 3 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
-      text="&#8547;"
+      text="&#8546; ДШ-85"
     ></Button>
     <Button
-      (tap)="pickHermetic(4)"
+      (tap)="pickMast(4)"
       [ngClass]="curDkz === 4 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
-      text="&#8548;"
-    ></Button>
-  </FlexBoxLayout>
-  <FlexBoxLayout class="zone-pick">
-    <Label class="mainLabels" text="Выбор герметика:"></Label>
-  </FlexBoxLayout>
-  <FlexBoxLayout
-    class="zone-pick"
-    *ngIf="curHermetic.single || curHermetic.one"
-  >
-    <Button
-      *ngIf="!curHermetic.one"
-      [ngClass]="
-        indexOfCurHer === 0 ? 'dkz-btn-her dkz-selected-btn' : 'dkz-btn'
-      "
-      (tap)="getDen(0)"
-      text="{{ curHermetic.single }}"
+      text="&#8547; ДШ-90"
     ></Button>
     <Button
-      *ngIf="curHermetic.one"
-      [ngClass]="
-        indexOfCurHer === 0 ? 'dkz-btn-her dkz-selected-btn' : 'dkz-btn-her'
-      "
-      (tap)="getDen(0)"
-      text="{{ curHermetic.one }}"
-    ></Button>
-    <Button
-      *ngIf="curHermetic.two"
-      [ngClass]="
-        indexOfCurHer === 1 ? 'dkz-btn-her dkz-selected-btn' : 'dkz-btn-her'
-      "
-      (tap)="getDen(1)"
-      text="{{ curHermetic.two }}"
+      (tap)="pickMast(5)"
+      [ngClass]="curDkz === 5 ? 'dkz-btn dkz-selected-btn' : 'dkz-btn'"
+      text="&#8548; ДШ-90"
     ></Button>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
@@ -98,7 +61,7 @@
     <Label
       [ngClass]="wrongLength ? 'user-outer-warning' : 'user-outer-nowarning'"
       text="&nbsp;&#9888;"
-      (tap)="warnUser('1000 > Lш > 1')"
+      (tap)="warnUser('10000 > Lш > 1')"
     ></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
@@ -108,14 +71,14 @@
       hint="Ширина шва"
       keyboardType="number"
       [text]="seamWidth"
-      [ngClass]="wrongWidth ? 'user-input-width-warning' : ''"
+      [ngClass]="wrongWidth ? 'user-input-warning' : ''"
       (textChange)="getInputWidth($event)"
     ></TextField>
     <Label text="мм"></Label>
     <Label
-      [ngClass]="wrongWidth ? 'user-width-warning' : 'user-outer-nowarning'"
+      [ngClass]="wrongWidth ? 'user-outer-warning' : 'user-outer-nowarning'"
       text="&nbsp;&#9888;"
-      (tap)="warnUser('39 > Bш > 5')"
+      (tap)="warnUser('10000 > Bш > 1')"
     ></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
@@ -126,38 +89,19 @@
       keyboardType="number"
       [text]="seamDepth"
       [ngClass]="wrongDepth ? 'user-input-warning' : ''"
-      [isEnabled]="chkDepthDisabled()"
       (textChange)="getInputDepth($event)"
     ></TextField>
     <Label text="мм"></Label>
     <Label
       [ngClass]="wrongDepth ? 'user-outer-warning' : 'user-outer-nowarning'"
       text="&nbsp;&#9888;"
-      (tap)="warnUser(' Hш > Bш')"
-    ></Label>
-  </FlexBoxLayout>
-  <FlexBoxLayout class="input-zone">
-    <Label text="H"></Label>
-    <Label class="b" text="зш"></Label>
-    <TextField
-      hint="Глубина заливки камеры шва"
-      keyboardType="number"
-      [text]="seamCastDepth"
-      [ngClass]="wrongCastDepth ? 'user-input-warning' : ''"
-      [isEnabled]="chkCastDepthDisabled()"
-      (textChange)="getInputCastDepth($event)"
-    ></TextField>
-    <Label text="мм"></Label>
-    <Label
-      [ngClass]="wrongCastDepth ? 'user-outer-warning' : 'user-outer-nowarning'"
-      text="&nbsp;&#9888;"
-      (tap)="warnUser('1000 > Hзш > 1')"
+      (tap)="warnUser('10000 > Hш > 1')"
     ></Label>
   </FlexBoxLayout>
   <FlexBoxLayout class="input-zone">
     <Button
       [isEnabled]="chkCreateDisabled()"
-      (tap)="onSaveSeam()"
+      (tap)="onSaveStoneSeam()"
       class="rule-btn"
       text="Добавить"
     ></Button>
@@ -181,7 +125,7 @@
     <Button
       [isEnabled]="!!seamList.length"
       class="rule-btn"
-      [nsRouterLink]="'rseam'"
+      [nsRouterLink]="'rstone'"
       text="Рассчитать"
     ></Button>
   </FlexBoxLayout>

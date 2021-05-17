@@ -1,12 +1,12 @@
 {
   "name": "@nativescript/template-tab-navigation-ng",
   "main": "src/main.ts",
-  "displayName": "Tabs",
+  "displayName": "Калькулятор brit",
   "templateType": "App template",
   "version": "8.0.6",
-  "description": "NativeScript Application",
-  "author": "NativeScript Team <oss@nativescript.org>",
-  "license": "SEE LICENSE IN <your-license-filename>",
+  "description": "Калькулятор brit",
+  "author": "Ev1l Soda",
+  "license": "SEE LICENSE IN LICENSE.txt",
   "publishConfig": {
     "access": "public"
   },

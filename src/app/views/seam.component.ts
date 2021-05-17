@@ -386,8 +386,7 @@ export class SeamComponent implements OnInit {
     };
   }
   chkCreateDisabled(): boolean {
-    return this.wrongWidth ||
-      this.wrongLength ||
+    return this.wrongLength ||
       this.wrongOneOfDepth ||
       this.calcInfo.den < 0 ||
       this.calcInfo.seamLength < 0 ||
@@ -397,8 +396,7 @@ export class SeamComponent implements OnInit {
       : true;
   }
   chkBtnDisabled(): boolean {
-    return this.wrongWidth ||
-      this.wrongLength ||
+    return this.wrongLength ||
       this.curSeamID === -1 ||
       this.wrongOneOfDepth ||
       this.calcInfo.den < 0 ||

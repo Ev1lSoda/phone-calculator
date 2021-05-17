@@ -1,0 +1,1 @@
+ns build android --release --key-store-path ./your_key_name.keystore --key-store-password abcde1 --key-store-alias your_key_alias --key-store-alias-password abcde1

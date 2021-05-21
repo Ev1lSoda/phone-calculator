@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "@nativescript/angular";
+import * as SocialShare from "@nativescript/social-share";
 
 import { CalcStateService } from "../service/calc-state.service";
 
@@ -11,6 +12,7 @@ import { CalcStateService } from "../service/calc-state.service";
 export class RStoneComponent implements OnInit {
   public seamResults = [];
   public results = { Msh1020: 0, Msh510: 0, Msh35: 0, Mgr: 0, MmCP: 0 };
+  private textForSocialShare = ``;
 
   constructor(
     private calcService: CalcStateService,
@@ -39,6 +41,20 @@ export class RStoneComponent implements OnInit {
       Mgr: this.roundNum(Mgr),
       MmCP: this.roundNum(MmCP)
     };
+    this.textForSocialShare += `
+    Мщ10-20: ${this.results["Msh1020"]}
+    Мщ5-10: ${this.results["Msh510"]}
+    Мщ3-5: ${this.results["Msh35"]}
+    Мгр: ${this.results["Mgr"]}
+    МмСР: ${this.results["MmCP"]}
+    `;
+  }
+
+  onShareText() {
+    SocialShare.shareText(
+      this.textForSocialShare,
+      "How would you like to share this text?"
+    );
   }
 
   roundNum(num: number): number {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "@nativescript/angular";
+import * as SocialShare from "@nativescript/social-share";
 
 import { CalcStateService } from "../service/calc-state.service";
 
@@ -20,6 +21,7 @@ export class RSeamComponent implements OnInit {
     private calcService: CalcStateService,
     private _routerExtensions: RouterExtensions
   ) {}
+  private textForSocialShare = ``;
 
   ngOnInit(): void {
     this.seamResults = this.calcService.getSeams().results;
@@ -41,6 +43,20 @@ export class RSeamComponent implements OnInit {
     this.results["mass"] = this.roundNum(mass);
     // @ts-ignore
     this.results["gMass"] = this.roundNum(gMass);
+    this.textForSocialShare += `
+    Герметик: ${this.results["mass"]}
+    Грунтовка полимерная: ${this.results["gMass"]}
+    `;
+    for (let indexOfRez of this.helper) {
+      this.textForSocialShare += `Шнур Ø${indexOfRez}: ${this.results[indexOfRez]} м`;
+    }
+  }
+
+  onShareText() {
+    SocialShare.shareText(
+      this.textForSocialShare,
+      "How would you like to share this text?"
+    );
   }
 
   roundNum(num: number): number {

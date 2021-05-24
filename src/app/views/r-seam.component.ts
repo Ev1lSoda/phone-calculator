@@ -44,8 +44,8 @@ export class RSeamComponent implements OnInit {
     // @ts-ignore
     this.results["gMass"] = this.roundNum(gMass);
     this.textForSocialShare += `
-    Герметик: ${this.results["mass"]}
-    Грунтовка полимерная: ${this.results["gMass"]}
+    Герметик: ${this.results["mass"]} кг
+    Грунтовка полимерная: ${this.results["gMass"]} кг
     `;
     for (let indexOfRez of this.helper) {
       this.textForSocialShare += `Шнур Ø${indexOfRez}: ${this.results[indexOfRez]} м`;

@@ -42,11 +42,11 @@ export class RStoneComponent implements OnInit {
       MmCP: this.roundNum(MmCP)
     };
     this.textForSocialShare += `
-    Мщ10-20: ${this.results["Msh1020"]}
-    Мщ5-10: ${this.results["Msh510"]}
-    Мщ3-5: ${this.results["Msh35"]}
-    Мгр: ${this.results["Mgr"]}
-    МмСР: ${this.results["MmCP"]}
+    Мщ10-20: ${this.results["Msh1020"]} кг
+    Мщ5-10: ${this.results["Msh510"]} кг
+    Мщ3-5: ${this.results["Msh35"]} кг
+    Мгр: ${this.results["Mgr"]} кг
+    МмСР: ${this.results["MmCP"]} кг
     `;
   }
 
